@@ -42,3 +42,21 @@ def get_fixtures_today():
     else:
         print("Erro:", response.text)
         return []
+
+def get_teams_for_league(league_id, season):
+    url = f"{BASE_URL}/teams?league={league_id}&season={season}"
+    res = requests.get(url, headers=headers)
+    if res.status_code == 200:
+        return res.json()["response"]
+    else:
+        print("Erro ao buscar times:", res.text)
+        return []
+
+def get_statistics_for_fixture(fixture_id):
+    url = f"{BASE_URL}/fixtures/statistics?fixture={fixture_id}"
+    res = requests.get(url, headers=headers)
+    if res.status_code == 200:
+        return res.json()["response"]
+    else:
+        print("Erro ao buscar estatísticas:", res.text)
+        return []
